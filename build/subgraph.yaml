@@ -1,0 +1,51 @@
+specVersion: 0.0.2
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: nft20factory
+    network: mainnet
+    source:
+      address: "0xf39b0F846f967895DB4c31B6b62d2BE3F5Af8454"
+      abi: nft20factory
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - OwnershipTransferred
+        - pairCreated
+      abis:
+        - name: nft20factory
+          file: nft20factory/abis/nft20factory.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: pairCreated(indexed address,address,uint256)
+          handler: handlepairCreated
+      file: nft20factory/nft20factory.wasm
+  - kind: ethereum/contract
+    name: NFT20Pair
+    network: mainnet
+    source:
+      address: "0x7824948612d5F6d3dBC54d1c1173715B997403a1"
+      abi: NFT20Pair
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+      abis:
+        - name: NFT20Pair
+          file: NFT20Pair/abis/NFT20Pair.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Withdraw(indexed uint256[],indexed uint256[])
+          handler: handleWithdraw
+      file: NFT20Pair/NFT20Pair.wasm

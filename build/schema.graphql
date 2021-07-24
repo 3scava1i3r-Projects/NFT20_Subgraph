@@ -1,0 +1,33 @@
+type factory @entity {
+  id: ID!
+  count: BigInt!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
+
+type pair @entity {
+  id: ID!
+  count: BigInt!
+  owner: Bytes! # address
+  spender: Bytes! # address
+}
+
+type OwnershipTransferred @entity {
+  id: ID!
+}
+
+type pairCreated @entity {
+  id: ID!
+}
+
+type Approval @entity {
+  id: ID!
+}
+
+type Transfer @entity {
+  id: ID!
+}
+
+type Withdraw @entity {
+  id: ID!
+}
