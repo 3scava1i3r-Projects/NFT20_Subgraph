@@ -38,6 +38,8 @@ dataSources:
         - Approval
         - Transfer
         - Withdraw
+        - User
+        - Pool
       abis:
         - name: NFT20Pair
           file: NFT20Pair/abis/NFT20Pair.json

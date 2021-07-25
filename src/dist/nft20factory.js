@@ -44,5 +44,6 @@ function handleOwnershipTransferred(event) {
     // - contract.owner(...)
 }
 exports.handleOwnershipTransferred = handleOwnershipTransferred;
-function handlepairCreated(event) { }
+function handlepairCreated(event) {
+}
 exports.handlepairCreated = handlepairCreated;

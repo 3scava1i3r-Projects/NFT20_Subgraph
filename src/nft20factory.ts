@@ -52,6 +52,10 @@ export function handleOwnershipTransferred(event: OwnershipTransferred): void {
   // - contract.logic(...)
   // - contract.nftToToken(...)
   // - contract.owner(...)
+
 }
 
-export function handlepairCreated(event: pairCreated): void {}
+export function handlepairCreated(event: pairCreated): void {
+
+  
+}

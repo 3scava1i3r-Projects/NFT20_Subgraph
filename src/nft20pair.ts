@@ -5,7 +5,9 @@ import {
   Transfer,
   Withdraw
 } from "../generated/NFT20Pair/NFT20Pair"
-import { pair } from "../generated/pairschema"
+import { pair , NFT } from "../generated/schema"
+
+
 
 export function handleApproval(event: Approval): void {
   // Entities can be loaded from the store using a string ID; this ID
@@ -28,8 +30,24 @@ export function handleApproval(event: Approval): void {
   entity.owner = event.params.owner
   entity.spender = event.params.spender
 
+
+  let NFTentity = NFT.load(event.transaction.from.toHex())
+
+  if (NFTentity == null) {
+    NFTentity = new NFT(event.transaction.from.toHex())
+  }
+
+  let paircontract = NFT20Pair.bind(event.address)
+
+  NFTentity.type = paircontract.getInfos().value0
+  NFTentity.name = paircontract.getInfos().value1
+  NFTentity.symbol = paircontract.getInfos().value2
+  NFTentity.supply = paircontract.getInfos().value3
+
+
   // Entities can be written to the store with `.save()`
   entity.save()
+  NFTentity.save()
 
   // Note: If a handler doesn't require existing field values, it is faster
   // _not_ to load the entity from the store. Instead, create it fresh with
@@ -68,6 +86,8 @@ export function handleApproval(event: Approval): void {
   // - contract.track1155(...)
   // - contract.transfer(...)
   // - contract.transferFrom(...)
+
+  
 }
 
 export function handleTransfer(event: Transfer): void {}

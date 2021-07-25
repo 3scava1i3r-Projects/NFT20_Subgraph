@@ -10,24 +10,14 @@ type pair @entity {
   count: BigInt!
   owner: Bytes! # address
   spender: Bytes! # address
+  info:[NFT!]! 
 }
 
-type OwnershipTransferred @entity {
-  id: ID!
+type NFT @entity {
+  id:ID!
+  type:BigInt!
+  name:String!
+  symbol:String!
+  supply:BigInt!
 }
 
-type pairCreated @entity {
-  id: ID!
-}
-
-type Approval @entity {
-  id: ID!
-}
-
-type Transfer @entity {
-  id: ID!
-}
-
-type Withdraw @entity {
-  id: ID!
-}
